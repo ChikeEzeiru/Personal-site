@@ -2,6 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Google Sans Flex", sans-serif;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 125%;
+  color: #111927;
 }
 
 .container {

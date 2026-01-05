@@ -3,3 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9fafb;
+}

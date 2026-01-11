@@ -12,7 +12,23 @@ h1 {
   color: #111927;
 }
 
+h2 {
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 125%;
+  color: #111927;
+}
+
+.inner-body {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  padding: 20px;
+  gap: 32px;
+}
+
 .static-container {
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,17 +36,40 @@ h1 {
   height: 100%;
   z-index: 1;
   margin: auto;
-  padding: 32px;
   background-color: #f9fafb;
-  position: absolute;
   border-radius: 6px;
+  padding: 32px;
+}
+
+.inner-container-top {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.inner-container-title {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.external-links {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
 }
 
 .scroll-container {
-  max-width: 60%;
-  margin: auto;
-  padding: 0, 48, 48, auto;
+  width: auto;
+  margin: 0;
+  padding: 0, 48, 48, 500;
   position: relative;
   overflow-y: scroll;
   height: 100vh;
+}
+
+.portfolio-home-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
 }

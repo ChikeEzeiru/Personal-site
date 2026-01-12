@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 h1 {
@@ -14,9 +14,21 @@ h1 {
 
 h2 {
   font-size: 44px;
+  font-weight: 600;
+  line-height: 125%;
+  color: #111927;
+  letter-spacing: -0.04em;
+}
+
+h6 {
+  font-size: 24px;
   font-weight: 500;
   line-height: 125%;
   color: #111927;
+}
+
+p {
+  color: #4d5761;
 }
 
 .inner-body {
@@ -47,10 +59,44 @@ h2 {
   row-gap: 24px;
 }
 
+.nav-links-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.nav-link {
+  cursor: pointer;
+  flex-flow: row;
+  place-content: center;
+  align-items: center;
+  gap: 4px;
+  width: min-content;
+  height: min-content;
+  padding: 4px 8px;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+  overflow: visible;
+  color: #4d5761;
+}
+
 .inner-container-title {
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+}
+
+.inner-container-bottom {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.home-image-pic {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 6px;
 }
 
 .external-links {
@@ -59,13 +105,21 @@ h2 {
   column-gap: 8px;
 }
 
+.active-link {
+  padding: 4px;
+}
+
+.social-links {
+  height: 20px;
+  width: 20px;
+}
+
 .scroll-container {
-  width: auto;
-  margin: 0;
-  padding: 0, 48, 48, 500;
-  position: relative;
+  width: 100%;
+  margin-left: 40%;
   overflow-y: scroll;
   height: 100vh;
+  padding: 2.5rem 2rem 2rem 2rem;
 }
 
 .portfolio-home-thumbnail {

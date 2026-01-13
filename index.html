@@ -13,17 +13,17 @@
 
   <body>
     <div class="inner-body">
-      <div class="static-container">
+      <aside class="static-container">
         <div class="inner-container-top">
-          <div class="nav-links-container">
-            <a href="#" class="nav-link">Home</a>
-            <a href="#" class="nav-link">Work</a>
-            <a href="#" class="nav-link">About</a>
-            <a href="#" class="nav-link">Contact</a>
-          </div>
+          <nav class="nav">
+            <a href="index.html" class="nav-link active-nav">Home</a>
+            <a href="work.html" class="nav-link">Work</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+          </nav>
 
           <div class="inner-container-title">
-            <h2>I'm Chike. I Design & build strategy-led products</h2>
+            <h2>I'm Chike. I Design <br />& build strategy-led products</h2>
             <p class="text-xl">
               I help startups design, prototype, and build usable web
               applications with Bubble.
@@ -80,43 +80,61 @@
             <p>4 years experience</p>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <div class="scroll-container">
+      <main class="scroll-container">
         <div class="small-title">
           <h6 class="display-sm">Featured Work</h6>
         </div>
         <div class="projects">
-          <div class="project-one project-card">
+          <a href="hosqare.html" class="project-card">
             <img
               src="./Assets/Gemini_Generated_Image_dr89jbdr89jbdr89.png"
               alt="healthcare app image thumbnail"
-              class="project-thumbnail"
-              width="100%"
-              height="400"
             />
-            <div class="project-name-container"></div>
-          </div>
+            <div class="project-overlay">
+              <div class="thumbnail-text">
+                <h6 class="thumbnail-title">HosQare Mobile App</h6>
+                <p class="thumbnail-body">
+                  Something something something for a patients bla bla bla
+                </p>
+              </div>
+            </div>
+          </a>
 
-          <div class="project-two project-card">
+          <a href="nina-jojer.html" class="project-card">
             <img
               src="./Assets/NJ Expertise sub page mockup copy.webp"
-              alt="Consulting app image thumbnail"
-              class="project-thumbnail"
+              alt="healthcare app image thumbnail"
             />
-            <div class="project-name-container"></div>
-          </div>
+            <div class="project-overlay">
+              <div class="thumbnail-text">
+                <h3 class="thumbnail-title">Consulting Firm Website</h3>
+                <p class="thumbnail-body">
+                  Something something something for a consulting business bla
+                  bla bla
+                </p>
+              </div>
+            </div>
+          </a>
 
-          <div class="project-three project-card">
+          <a href="ibloov.html" class="project-card">
             <img
               src="./Assets/Ibloov Hero 1 copy.webp"
               alt="event platform image thumbnail"
-              class="project-thumbnail"
             />
-            <div class="project-name-container"></div>
-          </div>
+            <div class="project-overlay">
+              <div class="thumbnail-text">
+                <h3 class="thumbnail-title">Event Platform Website</h3>
+                <p class="thumbnail-body">
+                  Something something something for an event platform bla bla
+                  bla
+                </p>
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
+      </main>
     </div>
   </body>
 </html>

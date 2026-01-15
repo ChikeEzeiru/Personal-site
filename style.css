@@ -46,6 +46,13 @@ h2 {
   letter-spacing: -0.04em;
 }
 
+h5 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 125%;
+  color: #384250;
+}
+
 h6 {
   font-size: 24px;
   font-weight: 500;
@@ -213,4 +220,25 @@ p {
 
 .thumbnail-body {
   color: #9da4ae;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column */
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.work-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: 0.75rem;
 }

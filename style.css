@@ -242,3 +242,38 @@ p {
   background-color: #f3f4f6;
   border-radius: 0.75rem;
 }
+
+/* Social links styling */
+.active-link {
+  width: 2rem;
+  height: 2rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0.375rem;
+  background-color: transparent;
+  color: #9da4ae;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+
+  transition: transform 0.2s ease;
+}
+
+/* Hover */
+.active-link:hover {
+  border: #ece9fe 1px solid;
+  background-color: #fbfaff;
+  color: #6927da;
+}
+
+.active-link:hover .nav-icon {
+  transform: scale(1.1);
+}
+/* End of styling for social links */

@@ -31,6 +31,7 @@ body {
   -ms-overflow-style: none;
 }
 
+/* Text styling */
 h1 {
   font-size: 56px;
   font-weight: 500;
@@ -63,6 +64,7 @@ h6 {
 p {
   color: #4d5761;
 }
+/* End of Text styling */
 
 .inner-body {
   display: flex;
@@ -93,19 +95,24 @@ p {
   row-gap: 24px;
 }
 
+/* Navigation Bar Styling */
 .nav {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   flex-direction: row;
   gap: 8px;
 }
 
 .nav-link {
+  position: relative;
+  z-index: 12;
   cursor: pointer;
   text-decoration: none;
   color: #525866;
   padding: 0.25rem 0.5rem;
   border-radius: 0.375rem;
   color: #4d5761;
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover {
@@ -120,6 +127,35 @@ p {
   border-radius: 0.675rem;
   box-shadow: 0rem 0.125rem 0.25rem rgba(0, 0, 0, 0.125);
 }
+
+.nav-backdrop {
+  position: absolute;
+  z-index: 1; /* Sits BEHIND the text */
+
+  /* Positioning: We lock it to the vertical center */
+  top: 0.5rem;
+  bottom: 0.5rem; /* Matches container padding */
+  left: 0; /* JS will change this value to move it */
+
+  /* Visuals of the White Pill */
+  background-color: #ffffff;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+
+  /* Initial State */
+  width: 0; /* Starts at 0, JS expands it immediately */
+  opacity: 1;
+
+  /* The Animation */
+  /* transition-property: specific properties for better performance */
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Hardware acceleration for smoother sliding */
+  will-change: transform, width;
+}
+
+/* End of Navigation Bar Styling */
 
 .inner-container-title {
   display: flex;
@@ -240,6 +276,7 @@ p {
   gap: 0.5rem;
   padding: 1rem;
   background-color: #f3f4f6;
+  border: #e5e7eb 1px solid;
   border-radius: 0.75rem;
 }
 
@@ -255,22 +292,28 @@ p {
   border-radius: 0.375rem;
   background-color: transparent;
   color: #9da4ae;
+  text-decoration: none;
+  transition: all 0.2s ease;
 
-  transition: background-color 0.2s ease, color 0.2s ease;
+  /* box-shadow to reserve the space. 
+  0 offset X, 0 offset Y, 0 blur, 1px width */
+  box-shadow: 0 0 0 1px transparent;
 }
 
 .nav-icon {
-  width: 20px;
-  height: 20px;
-
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 /* Hover */
 .active-link:hover {
-  border: #ece9fe 1px solid;
   background-color: #fbfaff;
   color: #6927da;
+
+  /* Painting the shadow purple to mimic a border */
+  box-shadow: 0 0 0 1px #ece9fe;
 }
 
 .active-link:hover .nav-icon {

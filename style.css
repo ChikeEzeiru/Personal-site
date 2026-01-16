@@ -64,6 +64,13 @@ h6 {
 p {
   color: #4d5761;
 }
+
+.text-lg {
+  font-size: 18px;
+  line-height: 142%;
+  color: #6c737f;
+  font-weight: 350;
+}
 /* End of Text styling */
 
 .inner-body {
@@ -320,3 +327,57 @@ p {
   transform: scale(1.1);
 }
 /* End of styling for social links */
+
+/* Footer Design */
+.footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #111927;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: auto;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #9da4ae;
+  font-size: 1rem;
+  line-height: 142%;
+}
+
+.footer-title {
+  color: #e5e7eb;
+}
+
+.footer-button {
+  width: fit-content;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: #f3f4f6;
+  border: #d2d6db 1px solid;
+  color: #111927;
+  font-size: 1rem;
+  font-weight: 450;
+  border-radius: 0.5rem;
+  box-shadow: 0rem 0.125rem 0.25rem rgba(0, 0, 0, 0.125);
+}
+
+.copyright-text {
+  font-size: 0.875rem;
+}
+
+.copyright-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+/* end of footer design */

@@ -33,7 +33,7 @@ h1 {
 }
 
 h2 {
-  font-size: 44px;
+  font-size: 48px;
   font-weight: 600;
   line-height: 125%;
   color: #111927;
@@ -110,6 +110,7 @@ p {
 
 /* HIDE EVERYTHING by default */
 .sidebar-content,
+.active-section,
 .main-content {
   display: none;
   opacity: 0;
@@ -118,6 +119,7 @@ p {
 
 /* SHOW ONLY ACTIVE groups */
 .sidebar-content,
+.active-section,
 .active-group {
   display: flex;
 }
@@ -199,7 +201,6 @@ p {
   /* Hardware acceleration for smoother sliding */
   will-change: transform, width;
 }
-
 /* End of Navigation Bar Styling */
 
 .inner-container-title {

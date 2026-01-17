@@ -1,136 +1,137 @@
-// DEBUGGUING LOGS
-console.log("1. Script has started running");
-console.log("2. Current Path is:", window.location.pathname);
-
-window.addEventListener("load", () => {
-  console.log("3. Window loaded. Checking routes...");
-});
-
-// MAP URL PATHS TO SECTION NAMES
+// =======================================================
+// 1. HASH ROUTER CONFIGURATION
+// =======================================================
+// Define which hash leads to which ID
 const routes = {
-  "/": "home",
-  "/index.html": "home",
-  "/work": "work",
-  "/about": "about",
-  "/contact": "contact",
-  // Projects
-  "/projects/hosqare": "hosqare",
-  "/projects/nina-jojer": "nina-jojer",
-  "/projects/ibloov": "ibloov",
+  "": "home", // Default (No hash)
+  home: "home",
+  work: "work",
+  about: "about",
+  contact: "contact",
+  // Projects (Note: No slashes needed here for keys)
+  "projects/hosqare": "hosqare",
+  "projects/nina-jojer": "nina-jojer",
+  "projects/ibloov": "ibloov",
 };
 
+// =======================================================
+// 2. MAIN SCRIPT
+// =======================================================
 window.addEventListener("load", () => {
+  console.log("🚀 Hash Router Started");
+
+  // Select Elements
   const navLinks = document.querySelectorAll(".nav-link");
   const allViews = document.querySelectorAll(".main-content, .view-section");
   const allSidebars = document.querySelectorAll(".sidebar-content");
   const backdrop = document.querySelector(".nav-backdrop");
 
-  // --- 1. CORE NAVIGATOR ---
+  // --- CORE ROUTER FUNCTION ---
   function handleRoute() {
-    // Get path, strip trailing slashes (e.g. /work/ -> /work)
-    let path = window.location.pathname.replace(/\/$/, "") || "/";
+    // 1. Get the Hash (e.g., "#/work" -> "work")
+    // This removes the '#' and any leading '/' so it matches our keys
+    let hash = window.location.hash.slice(1);
+    if (hash.startsWith("/")) hash = hash.slice(1);
 
-    // Find the target ID based on the route map; default to 'home'
-    const targetId = routes[path] || "home";
-    console.log("4. Route Logic decided to show ID:", targetId);
+    // 2. Default to home if hash is empty or not found
+    const targetId = routes[hash] || "home";
+    console.log("📍 Navigating to:", targetId);
 
-    // LOOK FOR THE MAIN CONTENT SECTION (e.g. view-home or view-hosqare)
+    // 3. Find the Section in HTML
     const targetSection = document.getElementById(`view-${targetId}`);
-    console.log("5. Did we find the section?", targetSection);
 
     if (targetSection) {
-      // A. Hide ALL main sections first
+      // A. Hide ALL Sections
       allViews.forEach((v) => {
-        v.classList.remove("active-section");
-        v.classList.remove("active-group");
-        v.style.display = "none";
+        v.classList.remove("active-section", "active-group");
+        v.style.display = ""; // Clear inline styles so CSS classes work
       });
 
-      // B. Show ONLY the target main section
-      targetSection.classList.add("active-section");
-      targetSection.style.display = "flex";
+      // B. Hide ALL Sidebars
+      allSidebars.forEach((s) => {
+        s.classList.remove("active-group");
+      });
 
-      // C. Handle Sidebar Logic
-      // 1. Determine the Nav Category (e.g. "work" for Hosqare)
+      // C. Show TARGET Section
+      targetSection.classList.add("active-section");
+
+      // D. Handle Sidebar
+      // Get category (e.g., "work" for a project)
       const category =
         targetSection.getAttribute("data-nav-category") || targetId;
 
-      // 2. Hide all sidebars initially
-      allSidebars.forEach((s) => {
-        s.classList.remove("active-group");
-        s.style.display = "none";
-      });
-
-      // 3. Decide which sidebar to show
-      // Priority 1: Specific Sidebar (e.g. sidebar-hosqare)
+      // Find sidebar (Specific first, then Category fallback)
       let sidebarToShow = document.getElementById(`sidebar-${targetId}`);
-
-      // Priority 2: Category Sidebar (e.g. sidebar-work) if specific one missing
       if (!sidebarToShow) {
         sidebarToShow = document.getElementById(`sidebar-${category}`);
       }
 
-      // 4. Show the chosen sidebar
+      // Show sidebar if found
       if (sidebarToShow) {
         sidebarToShow.classList.add("active-group");
-        sidebarToShow.style.display = "flex";
       }
 
-      // D. Update Nav Pill (Always based on Category)
+      // E. Update Nav Pill
       navLinks.forEach((l) => {
         l.classList.remove("active-nav");
+        // Check if this link matches the current category
         if (l.dataset.target === category) {
           l.classList.add("active-nav");
           moveBackdrop(l);
         }
       });
+
+      // F. Scroll to top
+      window.scrollTo(0, 0);
     } else {
-      console.error(
-        `❌ Route Error: Could not find section with id="view-${targetId}"`
-      );
+      console.warn("❌ Route not found, defaulting to Home");
+      // Optional: Redirect to home if route is bad
+      if (hash !== "") window.location.hash = "/";
     }
   }
 
-  // --- 2. PILL ANIMATION ---
+  // --- NAVIGATION HELPERS ---
+
+  // 1. Move the Pill
   function moveBackdrop(activeLink) {
     if (!activeLink || !backdrop) return;
-
     const linkRect = activeLink.getBoundingClientRect();
     const navRect = activeLink.parentElement.getBoundingClientRect();
-    const leftPosition = linkRect.left - navRect.left;
+    const leftPos = linkRect.left - navRect.left;
 
     backdrop.style.width = `${linkRect.width}px`;
-    backdrop.style.transform = `translateX(${leftPosition}px)`;
+    backdrop.style.transform = `translateX(${leftPos}px)`;
     backdrop.style.opacity = "1";
   }
 
-  // --- 3. CLICK HANDLING ---
-  // Expose function to global window so HTML onclick="..." works
+  // 2. Global Navigate Function (Available to HTML buttons)
   window.navigateTo = (path) => {
-    history.pushState({}, "", path);
-    handleRoute();
+    // Ensure path starts with / for clean URL (e.g., #/work)
+    if (!path.startsWith("/")) path = "/" + path;
+    window.location.hash = path;
   };
 
-  // Browser Back/Forward Button
-  window.addEventListener("popstate", handleRoute);
+  // --- EVENT LISTENERS ---
 
-  // Nav Links (Top Menu)
-  navLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const target = link.dataset.target;
-      const path = target === "home" ? "/" : `/${target}`;
-      navigateTo(path);
-    });
-  });
+  // Listen for hash changes (Back button, manual type, clicks)
+  window.addEventListener("hashchange", handleRoute);
 
-  // --- 4. INITIAL LOAD ---
-  // Run immediately to show correct page
-  handleRoute();
-
-  // Handle window resize (keeps pill aligned)
+  // Resize Listener for Pill
   window.addEventListener("resize", () => {
     const active = document.querySelector(".nav-link.active-nav");
     if (active) moveBackdrop(active);
   });
+
+  // Handle Nav Link Clicks
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = link.dataset.target;
+      const path = target === "home" ? "/" : target;
+      navigateTo(path);
+    });
+  });
+
+  // --- INITIAL START ---
+  handleRoute();
 });

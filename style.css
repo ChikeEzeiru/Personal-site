@@ -110,18 +110,17 @@ p {
 
 /* HIDE EVERYTHING by default */
 .sidebar-content,
-.active-section,
+.view-section,
 .main-content {
   display: none;
   opacity: 0;
-  animation: fadeUp 0.5s ease forwards;
 }
 
 /* SHOW ONLY ACTIVE groups */
-.sidebar-content,
 .active-section,
 .active-group {
   display: flex;
+  animation: fadeUp 0.5s ease forwards;
 }
 
 /* Animation Keyframes */
@@ -420,3 +419,15 @@ p {
   gap: 0.25rem;
 }
 /* end of footer design */
+
+/* STAGGER EFFECT: Sidebar First */
+
+/* 1. Sidebar appears immediately (0s delay) */
+.sidebar-content.active-group {
+  animation-delay: 0s;
+}
+
+/* 2. Main Content waits 0.1s before sliding up */
+.active-section {
+  animation-delay: 0.125s;
+}

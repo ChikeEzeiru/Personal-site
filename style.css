@@ -14,13 +14,6 @@ body {
 }
 
 /* Layout */
-.inner-body {
-  display: grid;
-  grid-template-columns: 32% 1fr;
-  gap: 32px;
-  min-height: 100vh;
-  padding: 20px;
-}
 
 body::-webkit-scrollbar {
   display: none;
@@ -81,18 +74,25 @@ p {
   gap: 32px;
 }
 
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .static-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   position: fixed;
   top: 20px;
   left: 20px;
   width: 32%;
   height: calc(100vh - 40px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 2rem;
   background-color: #fcfcfd;
   border-radius: 8px;
-  padding: 32px;
   z-index: 10;
 }
 
@@ -102,8 +102,40 @@ p {
   row-gap: 24px;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* HIDE EVERYTHING by default */
+.sidebar-content,
+.main-content {
+  display: none;
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+/* SHOW ONLY ACTIVE groups */
+.sidebar-content,
+.active-group {
+  display: flex;
+}
+
+/* Animation Keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Navigation Bar Styling */
-.nav {
+.nav-container {
   position: relative;
   display: inline-flex;
   flex-direction: row;
@@ -127,31 +159,37 @@ p {
 }
 
 .nav-link.active-nav {
-  background: #fbfaff;
-  border: #a48afb 1px solid;
   color: #111927;
   font-weight: 450;
-  border-radius: 0.675rem;
-  box-shadow: 0rem 0.125rem 0.25rem rgba(0, 0, 0, 0.125);
+}
+
+.nav-link.active-nav:hover {
+  background-color: transparent; /* Let the pill show through */
+  color: #111927; /* Keep the dark text color */
+  cursor: default; /* Optional: Shows the user "you are already here" */
 }
 
 .nav-backdrop {
   position: absolute;
-  z-index: 1; /* Sits BEHIND the text */
+  z-index: 11; /* Sits BEHIND the text */
 
   /* Positioning: We lock it to the vertical center */
-  top: 0.5rem;
-  bottom: 0.5rem; /* Matches container padding */
+  /* Matches container padding */
   left: 0; /* JS will change this value to move it */
 
   /* Visuals of the White Pill */
-  background-color: #ffffff;
-  border-radius: 9999px;
-  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+  height: 1.75rem;
+  background-color: fbfaff;
+  border-radius: 0.675rem;
+  border: #a48afb 1px solid;
+  box-shadow: 0rem 0.125rem 0.25rem rgba(0, 0, 0, 0.125);
 
   /* Initial State */
   width: 0; /* Starts at 0, JS expands it immediately */
-  opacity: 1;
+  opacity: 0;
+
+  /* Ensure the transition includes opacity so it fades in nicely */
+  transition: transform 0.3s ease, width 0.3s ease, opacity 0.2s ease;
 
   /* The Animation */
   /* transition-property: specific properties for better performance */

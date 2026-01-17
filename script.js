@@ -1,3 +1,11 @@
+// DEBUGGUING LOGS
+console.log("1. Script has started running");
+console.log("2. Current Path is:", window.location.pathname);
+
+window.addEventListener("load", () => {
+  console.log("3. Window loaded. Checking routes...");
+});
+
 // MAP URL PATHS TO SECTION NAMES
 const routes = {
   "/": "home",
@@ -24,9 +32,11 @@ window.addEventListener("load", () => {
 
     // Find the target ID based on the route map; default to 'home'
     const targetId = routes[path] || "home";
+    console.log("4. Route Logic decided to show ID:", targetId);
 
     // LOOK FOR THE MAIN CONTENT SECTION (e.g. view-home or view-hosqare)
     const targetSection = document.getElementById(`view-${targetId}`);
+    console.log("5. Did we find the section?", targetSection);
 
     if (targetSection) {
       // A. Hide ALL main sections first

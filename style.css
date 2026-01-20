@@ -588,3 +588,192 @@ p {
   flex-direction: column;
   gap: 0.25rem;
 }
+
+.tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tech-stack-list {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  background-color: #f3f4f6;
+  padding: 0.375rem 0.5rem 0.375rem 0.375rem;
+  border-radius: 0.5rem;
+  border: #e5e7eb 1px solid;
+}
+
+.skill-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* 1. THE WRAPPER (Handles Layout & Masking) */
+.carousel-wrapper {
+  /* 1. THE LAYOUT HACK */
+  /* This tricks the browser into thinking the element is tiny */
+  /* so it doesn't stretch the parent container. */
+  width: 1px;
+  min-width: 100%; /* ...But this forces it to visually fill the space. */
+
+  /* 2. Standard Constraints */
+  max-width: 100%;
+  overflow: hidden; /* Cuts off the long track */
+
+  /* 3. Visuals */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 0;
+
+  /* 4. The Fade Mask */
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  mask: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+}
+
+/* 2. THE ROW (Holds the track) */
+.marquee-row {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+  user-select: none; /* Prevents highlighting text while scrolling */
+}
+
+/* 3. THE TRACK (The Moving Part) */
+.marquee-track {
+  display: flex;
+  gap: 0.75rem; /* Space between pills */
+  width: 100%; /* Force it to be wide */
+  flex-shrink: 0; /* Prevent squishing */
+
+  /* Default Animation: 40s */
+  animation: scroll 40s linear infinite;
+}
+
+/* 4. THE PILL STYLE (The Spans) */
+.carousel-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #fcfcfd; /* Light Grey Background */
+  color: #384250; /* Dark Text */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem; /* Fully Rounded */
+  padding: 0.5rem 1rem; /* Padding inside the pill */
+
+  font-size: 1rem;
+  font-weight: 400;
+  white-space: nowrap; /* Text stays on one line */
+}
+
+/* --- ANIMATION LOGIC --- */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- MODIFIERS --- */
+
+/* Speed: Fast */
+.speed-fast .marquee-track {
+  animation-duration: 25s;
+}
+
+/* Direction: Reverse (Right Scroll) */
+.reverse {
+  animation-direction: reverse;
+}
+
+/* Interaction: Pause on Hover */
+.hover-slow:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  white-space: normal;
+}
+
+.testimonial-card {
+  /* 1. SIZE & SHAPE */
+  width: 400px; /* Fixed width prevents "slimming" */
+  min-height: 240px; /* Keeps them uniform height */
+  flex-shrink: 0; /* Prevents squashing */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes author to bottom */
+  gap: 1.5rem;
+  padding: 1.25rem;
+
+  /* 2. VISUALS */
+  background-color: #fcfcfd;
+  border-radius: 0.75rem; /* Larger radius for cards */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  /* 3. TEXT RESET (Critical!) */
+  white-space: normal; /* Allows text to wrap into paragraphs */
+  text-align: left;
+}
+
+/* The Body Text */
+.testimonial-card > p {
+  font-size: 1rem;
+  line-height: 1.43;
+  color: #384250;
+  margin: 0;
+}
+
+/* The Author Section */
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  padding-top: 1rem;
+}
+
+.testimonial-author p:first-child {
+  /* Name */
+  font-weight: 600;
+  font-size: 1rem;
+  color: #111;
+  margin: 0;
+}
+
+.testimonial-author p:last-child {
+  /* Role/Company */
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+/* END OF CAROUSEL STYLES */

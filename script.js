@@ -135,3 +135,29 @@ window.addEventListener("load", () => {
   // --- INITIAL START ---
   handleRoute();
 });
+
+// 1. Define your two icons (We use the Data URIs so no files are needed)
+const faviconDark =
+  "data:image/svg+xml,%3Csvg width='516' height='516' viewBox='0 0 516 516' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M300.22 409.48L288.81 424.89L277.41 409.48L165.71 258.17L277.41 106.95L288.9 91.45L289.51 92.32L300.31 106.95L349.67 173.81H471.47L422.11 106.95L351.58 9H228.05L103.55 177.73H103.38L44 258.17L103.38 338.61L227.96 507.34V507.42H349.41L421.84 409.48L471.29 342.53H349.67L300.22 409.48Z' fill='%23190426'/%3E%3Cpath d='M279.48 260.01L349.67 173.81V342.53L279.48 260.01Z' fill='%23A83AEF'/%3E%3C/svg%3E";
+
+const faviconLight =
+  "data:image/svg+xml,%3Csvg width='516' height='516' viewBox='0 0 516 516' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M300.22 409.48L288.81 424.89L277.41 409.48L165.71 258.17L277.41 106.95L288.9 91.45L289.51 92.32L300.31 106.95L349.67 173.81H471.47L422.11 106.95L351.58 9H228.05L103.55 177.73H103.38L44 258.17L103.38 338.61L227.96 507.34V507.42H349.41L421.84 409.48L471.29 342.53H349.67L300.22 409.48Z' fill='%23FFFFFF'/%3E%3Cpath d='M279.48 260.01L349.67 173.81V342.53L279.48 260.01Z' fill='%23A83AEF'/%3E%3C/svg%3E";
+
+// 2. Select the elements
+const faviconTag = document.getElementById("dynamic-favicon");
+const matcher = window.matchMedia("(prefers-color-scheme: dark)");
+
+// 3. The Swap Function
+function updateFavicon() {
+  if (matcher.matches) {
+    // System is Dark -> Use White Icon
+    faviconTag.href = faviconLight;
+  } else {
+    // System is Light -> Use Dark Icon
+    faviconTag.href = faviconDark;
+  }
+}
+
+// 4. Run immediately and Listen for changes
+updateFavicon();
+matcher.addEventListener("change", updateFavicon);

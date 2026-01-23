@@ -41,8 +41,8 @@ h1 {
 }
 
 h2 {
-  font-size: 48px;
-  font-weight: 600;
+  font-size: clamp(1.875rem, 1.11vw + 1.5rem, 2.5rem);
+  font-weight: 550;
   line-height: 125%;
   color: #1f2a37;
   letter-spacing: -0.04em;
@@ -809,4 +809,78 @@ p {
 .text-md-semibold {
   font-weight: 500;
   color: #111927;
+}
+
+.view-section {
+  display: none; /* Hide by default! */
+  /* Keep your layout constraints */
+  flex-direction: column;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  gap: 4rem;
+}
+
+.view-section.active-section {
+  display: flex;
+
+  .project-hero-img-section {
+    display: flex;
+    flex-direction: row; /* Stacks images vertically */
+    width: 100%;
+    max-width: 100%;
+    gap: 1.5rem; /* Space between images */
+  }
+
+  /* 3. THE IMAGES THEMSELVES */
+  .portfolio-img {
+    display: block; /* Removes weird spacing under images */
+    width: 100%; /* Fills the wrapper */
+    max-width: 50%; /* NEVER wider than the wrapper */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: cover;
+    border-radius: 12px; /* Optional: Looks nice */
+  }
+}
+
+.project-title-and-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inner-project-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.role-title {
+  color: #9da4ae;
+  font-weight: 350;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.body-text {
+  color: #384250;
+}
+
+.role-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

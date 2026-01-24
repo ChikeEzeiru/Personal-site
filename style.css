@@ -826,17 +826,26 @@ p {
 
   .project-hero-img-section {
     display: flex;
-    flex-direction: row; /* Stacks images vertically */
+    flex-direction: column; /* Stacks images vertically */
     width: 100%;
     max-width: 100%;
     gap: 1.5rem; /* Space between images */
+  }
+
+  .full-width-img-group {
+    aspect-ratio: 16 / 9;
+    max-height: 27.5rem;
+    align-items: center;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fcfcfc;
   }
 
   /* 3. THE IMAGES THEMSELVES */
   .portfolio-img {
     display: block; /* Removes weird spacing under images */
     width: 100%; /* Fills the wrapper */
-    max-width: 50%; /* NEVER wider than the wrapper */
+    max-width: 100%; /* NEVER wider than the wrapper */
     height: auto; /* Maintains aspect ratio */
     object-fit: cover;
     border-radius: 12px; /* Optional: Looks nice */

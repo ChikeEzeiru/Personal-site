@@ -842,6 +842,53 @@ p {
     background: #fcfcfc;
   }
 
+  .media-wrapper {
+    width: 100%;
+    position: relative; /* Safety for positioning */
+
+    /* Centering & Overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* FORCE radius on videos */
+    border-radius: 16px; /* Your preferred radius */
+
+    /* Visuals */
+    background: #fcfcfc; /* Placeholder color */
+    transform: translateZ(0); /* Safari video radius fix */
+  }
+
+  /* 2. THE SHAPES (Modifier Classes) */
+
+  /* Use this for your STACKED column items (Cinema style) */
+  .ratio-wide {
+    aspect-ratio: 16 / 9;
+    max-height: 27.5rem; /* Keeps it from getting too huge on big screens */
+  }
+
+  /* Use this for your GRID items (Boxier style) */
+  .ratio-box {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* 3. THE CONTENT (The Image/Video inside) */
+  .media-wrapper img,
+  .media-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crucial: Fills the box without stretching */
+    display: block;
+    border-radius: 0.625rem; /* Optional: Looks nice */
+  }
+
+  /* --- OPTIONAL: RESPONSIVE SHAPESHIFT --- */
+  /* If you want the Grid items (4/3) to become Wide (16/9) when on Mobile */
+  @media (max-width: 768px) {
+    .ratio-box {
+      aspect-ratio: 16 / 9; /* Switches to wide on phones */
+    }
+  }
+
   /* 3. THE IMAGES THEMSELVES */
   .portfolio-img {
     display: block; /* Removes weird spacing under images */

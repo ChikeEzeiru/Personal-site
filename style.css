@@ -73,7 +73,7 @@ h6 {
   font-size: 24px;
   font-weight: 550;
   line-height: 125%;
-  color: #1f2a37;
+  color: #4d5761;
 }
 
 p {
@@ -525,7 +525,8 @@ p {
   color: #e5e7eb;
 }
 
-.footer-button {
+.footer-button,
+.project-button {
   width: fit-content;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -861,13 +862,16 @@ p {
 .title-and-body-section {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+}
+
+.small-title-and-body-section {
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
 }
 
-.inner-project-section,
-.project-learnings-section,
-.research-and-insights,
-.project-whole-impact-section {
+.role-section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -903,7 +907,7 @@ ul {
   gap: 1rem;
 }
 
-.research-section-card {
+.content-card {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
@@ -913,24 +917,34 @@ ul {
   border-radius: 1rem;
 }
 
-.research-and-insights {
-  padding-top: 2rem;
-}
-
 .bold {
-  font-weight: 500;
+  font-weight: 450;
+  color: #6c737f;
 }
 
-.research-section-title-grp {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-}
-
-.research-section-cards-grp {
+.four-content-card-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+}
+
+.three-content-card-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* MOBILE LAYOUT (Under 768px) */
+@media (max-width: 768px) {
+  .three-content-card-group {
+    grid-template-columns: 1fr; /* Forces a single column stack */
+  }
+}
+
+.no-border-card {
+  border: none;
+  padding: 0;
 }
 
 .research-images-list {

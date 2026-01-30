@@ -443,40 +443,54 @@ p {
 
 /* Social links styling */
 .active-link {
+  /* Layout & Size */
   width: 2rem;
   height: 2rem;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
+  /* Visuals (Default State) */
   border-radius: 0.375rem;
   background-color: transparent;
+
+  /* CRITICAL: This color drives the icon color */
   color: #9da4ae;
   text-decoration: none;
+
+  /* Smooth Transitions */
   transition: all 0.2s ease;
 
-  /* box-shadow to reserve the space. 
-  0 offset X, 0 offset Y, 0 blur, 1px width */
+  /* Your box-shadow space reservation */
   box-shadow: 0 0 0 1px transparent;
 }
 
+/* 2. THE ICON (The Sprite) */
+/* I renamed this from .sprite-icon to .nav-icon to match your code */
 .nav-icon {
   width: 18px;
   height: 18px;
-  transition: transform 0.2s ease;
   flex-shrink: 0;
+
+  /* THE MAGIC: Forces SVG to use the parent's 'color' */
+  fill: currentColor;
+
+  /* Smooth Scale Transition */
+  transition: transform 0.2s ease;
 }
 
-/* Hover */
+/* 3. HOVER STATE (Purple Mode) */
 .active-link:hover {
   background-color: #fbfaff;
+
+  /* This color change instantly turns the SVG purple */
   color: #6927da;
 
-  /* Painting the shadow purple to mimic a border */
+  /* Your Purple Shadow Border */
   box-shadow: 0 0 0 1px #ece9fe;
 }
 
+/* 4. HOVER SCALE */
 .active-link:hover .nav-icon {
   transform: scale(1.1);
 }

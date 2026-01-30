@@ -161,3 +161,47 @@ function updateFavicon() {
 // 4. Run immediately and Listen for changes
 updateFavicon();
 matcher.addEventListener("change", updateFavicon);
+
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Select all videos with the class 'lazy-video'
+  const lazyVideos = document.querySelectorAll("video.lazy-video");
+
+  // 2. Check if the browser supports IntersectionObserver (It should!)
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          // IF VIDEO IS IN VIEW
+          if (entry.isIntersecting) {
+            const video = entry.target;
+
+            // Play the video (this triggers the download)
+            // We use a promise to prevent errors if the user scrolls too fast
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch((error) => {
+                // Auto-play was prevented (browser settings)
+                // Show controls so user can play manually
+                // video.controls = true;
+              });
+            }
+          }
+
+          // IF VIDEO LEAVES VIEW
+          else {
+            // Pause it to save resources
+            entry.target.pause();
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px 200px 0px", // Starts loading 200px BEFORE it enters screen
+      }
+    );
+
+    // 3. Start watching every video
+    lazyVideos.forEach((video) => {
+      videoObserver.observe(video);
+    });
+  }
+});

@@ -869,6 +869,7 @@ p {
   /* Use this for your GRID items (Boxier style) */
   .ratio-box {
     aspect-ratio: 4 / 3;
+    max-height: fit-content;
   }
 
   /* 3. THE CONTENT (The Image/Video inside) */
@@ -980,6 +981,12 @@ ul {
   grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
   gap: 1.5rem;
   width: 100%;
+}
+
+.three-content-card-group.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 /* MOBILE LAYOUT (Under 768px) */

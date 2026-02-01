@@ -523,7 +523,7 @@ p {
 
 .footer-links {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.25rem;
   width: auto;
 }
@@ -533,6 +533,7 @@ p {
   color: #9da4ae;
   font-size: 1rem;
   line-height: 142%;
+  padding: 0.5rem;
 }
 
 .footer-title {
@@ -883,6 +884,11 @@ p {
   /* Use this for your GRID items (Boxier style) */
   .ratio-box {
     aspect-ratio: 4 / 3;
+    max-height: fit-content;
+  }
+
+  .ratio-polygon {
+    aspect-ratio: 16 / 9;
     max-height: fit-content;
   }
 

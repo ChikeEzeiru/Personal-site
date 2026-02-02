@@ -63,8 +63,8 @@ h4 {
 }
 
 h5 {
-  font-size: 32px;
-  font-weight: 500;
+  font-size: clamp(1.25rem, 1.125vw + 0.75rem, 1.625rem);
+  font-weight: 450;
   line-height: 125%;
   color: #384250;
 }

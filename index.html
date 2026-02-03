@@ -285,7 +285,7 @@
           <div class="inner-container-top">
             <div class="inner-container-title">
               <h1>Let's Discuss</h1>
-              <p class="text-lg gray-500">We can hop on a quick call</p>
+              <p class="text-lg gray-500">Let's talk about what you need</p>
             </div>
           </div>
 
@@ -1735,9 +1735,53 @@
           </footer>
         </section>
 
-        <section id="view-contact" class="main-content">
-          <div class="small-title">
-            <h6 class="display-sm">Contact Me</h6>
+        <section id="view-contact" class="main-content contact-section">
+          <div class="title-and-body-section">
+            <h4 class="display-sm">Contact Me</h4>
+            <p class="body-text text-lg">Choose how you'd like to connect.</p>
+          </div>
+        
+          <div class="contact-form-section">
+            <div class="contact-toggle-wrapper">
+              <div class="toggle-backdrop"></div>
+
+              <button class="toggle-btn" id="btn-email" onclick="switchContact('email')">
+                Send me an Email
+              </button>
+  
+              <button class="toggle-btn" id="btn-calendar" onclick="switchContact('calendar')">
+                Book a Discovery Call
+              </button>
+            </div>
+        
+            <div id="view-calendar" class="contact-view active-view">
+              <div class="placeholder-cal">
+                <div class="calendly-inline-widget" data-url="https://calendly.com/chike-ezeiru/30min?month=2026-02" style="min-width:320px;height:630px;">
+                </div>
+          
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+              </div>
+            </div>
+        
+            <div id="view-email" class="contact-view">
+            <div class="email-card">
+              <p class="email-label">Drop me a line at</p>
+              
+              <div class="email-action-row">
+                <span id="my-email">chike.ezeiru@gmail.com</span>
+                
+                <button class="copy-btn" onclick="copyEmail()">
+                  <span id="copy-text">Copy</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+              
+              <p class="email-note">I typically respond within 24 hours.</p>
+            </div>
+            </div>
           </div>
         </section>
 

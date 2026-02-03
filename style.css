@@ -283,6 +283,7 @@ p {
   flex-direction: column;
   gap: 24px;
   padding: 2rem;
+  width: 100%;
 }
 
 .featured-work-section {
@@ -1070,4 +1071,148 @@ ul {
   object-fit: cover;
   object-position: center !important;
   display: block;
+}
+
+.contact-section {
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+/* ========================================= */
+/* CONTACT SWITCHER STYLES                   */
+/* ========================================= */
+
+/* THE TOGGLE BUTTONS */
+.contact-toggle-wrapper {
+  position: relative; /* Anchor for the sliding pill */
+  display: inline-flex;
+  background: #f9fafb; /* Light gray background */
+  padding: 4px; /* Space for the pill to slide inside */
+  border-radius: 0.625rem; /* Pill shape */
+  border: 1px solid #e5e7eb;
+  width: fit-content;
+
+  /* Creates a stacking context so backdrop stays contained */
+  isolation: isolate;
+}
+
+.toggle-backdrop {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0; /* JS controls this */
+
+  /* YOUR ACTIVE STYLES MOVED HERE */
+  background: #ffffff;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 3px #0a0d120d, 0 1px 2px -1px #0a0d121a;
+
+  z-index: 1; /* Sits behind text, above gray background */
+
+  /* The Animation */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 0; /* Starts hidden, JS expands it */
+}
+
+.toggle-btn {
+  position: relative;
+  z-index: 2; /* Sits ON TOP of the backdrop */
+
+  border: none;
+  background: transparent; /* Must be transparent now */
+  padding: 10px 24px;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 450;
+  color: #6b7280;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease; /* Only animate text color */
+}
+
+/* Active State (White with Shadow) */
+.toggle-btn.active {
+  font-weight: 500;
+  color: #111827; /* Dark text */
+}
+
+/* CONTENT VIEWS */
+.contact-view {
+  display: none; /* Hide both by default */
+  animation: fadeIn 0.4s ease;
+}
+
+.contact-view.active-view {
+  display: block; /* Show only the active one */
+  box-sizing: border-box;
+}
+
+/* EMAIL CARD STYLING */
+.email-card {
+  /* Change from inline-block to flex so we can control width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns text to left */
+
+  /* THE KEY FIX: */
+  width: 100% !important; /* Forces the card to stretch full width */
+  box-sizing: border-box; /* Ensures padding doesn't break the layout */
+
+  /* Keep your existing visuals */
+  padding: 2rem;
+  border-radius: 0.75rem;
+}
+
+.email-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.copy-btn {
+  background: white;
+  border: 1px solid #d1d5db;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#view-contact {
+  width: 100%;
+}
+
+.contact-form-section {
+  display: flex !important;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100% !important;
 }

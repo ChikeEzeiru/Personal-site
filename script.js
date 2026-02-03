@@ -205,3 +205,87 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+/* ========================================= */
+/* CONTACT SWITCHER LOGIC (ROBUST VERSION)   */
+/* ========================================= */
+
+window.switchContact = function (mode) {
+  const btnEmail = document.getElementById("btn-email");
+  const btnCalendar = document.getElementById("btn-calendar");
+  const backdrop = document.querySelector(".toggle-backdrop");
+
+  // Safety Check: If elements are missing, stop
+  if (!btnEmail || !btnCalendar || !backdrop) return;
+
+  // Decide active button
+  const activeBtn = mode === "email" ? btnEmail : btnCalendar;
+
+  // Update classes
+  btnEmail.classList.remove("active");
+  btnCalendar.classList.remove("active");
+  activeBtn.classList.add("active");
+
+  // --- THE FIX: Handle Hidden Elements ---
+  // If the button has no width (section is hidden), the math fails.
+  // We check if width > 0 before applying styles.
+  if (activeBtn.offsetWidth > 0) {
+    backdrop.style.width = activeBtn.offsetWidth + "px";
+    backdrop.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
+    backdrop.style.opacity = "1"; // Ensure it's visible
+  } else {
+    // Optional: If hidden, hide the pill so it doesn't float weirdly
+    backdrop.style.opacity = "0";
+  }
+
+  // Toggle Content Views
+  const viewCalendar = document.getElementById("view-calendar");
+  const viewEmail = document.getElementById("view-email");
+  const activeView = document.getElementById("view-" + mode);
+
+  if (viewCalendar) viewCalendar.classList.remove("active-view");
+  if (viewEmail) viewEmail.classList.remove("active-view");
+  if (activeView) activeView.classList.add("active-view");
+};
+
+// INITIALIZATION
+// We use a slight delay or 'window.onload' to ensure fonts/layout are ready
+window.addEventListener("load", () => {
+  // Try to initialize
+  switchContact("email");
+
+  // EXTRA SAFETY:
+  // If your site uses tabs, run this again whenever the 'Contact' tab is clicked
+  // You can create a specialized observer if needed, but a timeout helps catch late renders.
+  setTimeout(() => switchContact("email"), 300);
+});
+
+/* ========================================= */
+/* COPY EMAIL LOGIC                          */
+/* ========================================= */
+window.copyEmail = function () {
+  const emailText = document.getElementById("my-email").innerText;
+
+  // NOTE: This API only works on HTTPS sites or Localhost!
+  navigator.clipboard
+    .writeText(emailText)
+    .then(() => {
+      const label = document.getElementById("copy-text");
+      const originalText = "Copy";
+
+      label.innerText = "Copied!";
+      label.style.color = "#6927da";
+      label.style.fontWeight = "600";
+
+      setTimeout(() => {
+        label.innerText = originalText;
+        label.style.color = "";
+        label.style.fontWeight = "";
+      }, 2000);
+    })
+    .catch((err) => {
+      console.error("Clipboard failed: ", err);
+      // Fallback for non-secure contexts (optional)
+      alert("Copied to clipboard: " + emailText);
+    });
+};

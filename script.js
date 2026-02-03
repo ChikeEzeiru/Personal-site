@@ -207,56 +207,64 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* ========================================= */
-/* CONTACT SWITCHER LOGIC (ROBUST VERSION)   */
+/* SMART CONTACT SWITCHER (Lazy Loads Calendly) */
 /* ========================================= */
+
+// Global flag to track if we already loaded the script
+let isCalendlyLoaded = false;
 
 window.switchContact = function (mode) {
   const btnEmail = document.getElementById("btn-email");
   const btnCalendar = document.getElementById("btn-calendar");
   const backdrop = document.querySelector(".toggle-backdrop");
 
-  // Safety Check: If elements are missing, stop
+  // 1. Safety Check
   if (!btnEmail || !btnCalendar || !backdrop) return;
 
-  // Decide active button
+  // 2. Decide active button
   const activeBtn = mode === "email" ? btnEmail : btnCalendar;
 
-  // Update classes
+  // 3. Update Visuals (Buttons & Pill)
   btnEmail.classList.remove("active");
   btnCalendar.classList.remove("active");
   activeBtn.classList.add("active");
 
-  // --- THE FIX: Handle Hidden Elements ---
-  // If the button has no width (section is hidden), the math fails.
-  // We check if width > 0 before applying styles.
   if (activeBtn.offsetWidth > 0) {
     backdrop.style.width = activeBtn.offsetWidth + "px";
     backdrop.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
-    backdrop.style.opacity = "1"; // Ensure it's visible
-  } else {
-    // Optional: If hidden, hide the pill so it doesn't float weirdly
-    backdrop.style.opacity = "0";
+    backdrop.style.opacity = "1";
   }
 
-  // Toggle Content Views
-  const viewCalendar = document.getElementById("view-calendar");
-  const viewEmail = document.getElementById("view-email");
-  const activeView = document.getElementById("view-" + mode);
+  // 4. Toggle Views
+  document.getElementById("view-calendar").classList.remove("active-view");
+  document.getElementById("view-email").classList.remove("active-view");
+  document.getElementById("view-" + mode).classList.add("active-view");
 
-  if (viewCalendar) viewCalendar.classList.remove("active-view");
-  if (viewEmail) viewEmail.classList.remove("active-view");
-  if (activeView) activeView.classList.add("active-view");
+  // 5. THE PERFORMANCE FIX: Load Calendly ONLY if needed
+  if (mode === "calendar" && !isCalendlyLoaded) {
+    loadCalendlyScript();
+  }
 };
 
-// INITIALIZATION
-// We use a slight delay or 'window.onload' to ensure fonts/layout are ready
-window.addEventListener("load", () => {
-  // Try to initialize
-  switchContact("email");
+// Helper function to inject the script
+function loadCalendlyScript() {
+  console.log("Loading Calendly..."); // Debugging
 
-  // EXTRA SAFETY:
-  // If your site uses tabs, run this again whenever the 'Contact' tab is clicked
-  // You can create a specialized observer if needed, but a timeout helps catch late renders.
+  const script = document.createElement("script");
+  script.src = "https://assets.calendly.com/assets/external/widget.js";
+  script.async = true;
+
+  // Append it to the body so it starts running
+  document.body.appendChild(script);
+
+  // Mark as loaded so we don't download it twice
+  isCalendlyLoaded = true;
+}
+
+// Initial Load
+window.addEventListener("load", () => {
+  switchContact("email");
+  // Redundant check to ensure pill alignment
   setTimeout(() => switchContact("email"), 300);
 });
 

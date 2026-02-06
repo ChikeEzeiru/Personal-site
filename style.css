@@ -513,6 +513,38 @@ p {
   background-color: #384250;
 }
 
+.project-button-primary {
+  padding: 0.75rem 1.25rem;
+  background-color: #1f2a37;
+  color: #ffffff;
+  width: fit-content;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.project-button-primary:hover {
+  background-color: #384250;
+}
+
+.project-button {
+  padding: 0.75rem 1.25rem;
+  background-color: transparent;
+  color: #1f2a37;
+  width: fit-content;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: #d2d6db 1px solid;
+}
+
+.project-button:hover {
+  background-color: #f3f4f6;
+  border-color: #d2d6db;
+}
+
 /* Footer Design */
 .footer {
   display: flex;
@@ -543,8 +575,7 @@ p {
   color: #e5e7eb;
 }
 
-.footer-button,
-.project-button {
+.footer-button {
   width: fit-content;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -1077,6 +1108,18 @@ ul {
 .contact-section {
   gap: 2rem;
   box-sizing: border-box;
+}
+
+.content-and-button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.cta-section {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 /* ========================================= */

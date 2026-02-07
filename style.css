@@ -1024,6 +1024,13 @@ ul {
   color: #6c737f;
 }
 
+.subhead-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 1rem;
+}
+
 .four-content-card-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1114,6 +1121,10 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+}
+
+.end-of-page {
+  margin-bottom: 2rem;
 }
 
 .cta-section {

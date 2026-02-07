@@ -976,7 +976,7 @@ p {
 .role-section {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .role-title {
@@ -1029,6 +1029,10 @@ ul {
   flex-direction: column;
   gap: 0.875rem;
   margin-top: 1rem;
+}
+
+.spacer {
+  padding: 0.125rem;
 }
 
 .four-content-card-group {

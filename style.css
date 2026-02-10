@@ -549,6 +549,23 @@ p {
   border-color: #d2d6db;
 }
 
+.cta-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.full-width-button {
+  flex: 1;
+  width: 100%;
+}
+
+/* On screens smaller than 768px (Mobile) */
+@media (max-width: 768px) {
+  .cta-links {
+    flex-direction: column; /* Stacks them vertically */
+  }
+}
+
 /* Footer Design */
 .footer {
   display: flex;

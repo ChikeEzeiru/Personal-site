@@ -1296,3 +1296,7 @@ ul {
   gap: 2rem;
   width: 100% !important;
 }
+
+.crop-top-img {
+  object-position: bottom center !important;
+}

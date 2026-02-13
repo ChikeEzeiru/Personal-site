@@ -1425,3 +1425,22 @@ ul {
     gap: 3rem;
   }
 }
+
+@media (max-width: 768px) {
+  /* 1. Force the Overlay to be Visible */
+  .project-overlay {
+    opacity: 1 !important; /* Override the default "0" opacity */
+    visibility: visible !important;
+
+    /* OPTIONAL: Adjust the background so it's not too dark */
+    /* On desktop, it might be fully black. On mobile, a gradient is better so we can see the image too. */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  }
+
+  /* 2. Ensure the text inside is visible */
+  .project-title,
+  .project-category {
+    transform: translateY(0) !important; /* Reset any slide-up animation */
+    opacity: 1 !important;
+  }
+}

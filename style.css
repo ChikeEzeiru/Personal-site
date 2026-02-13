@@ -1064,6 +1064,12 @@ ul {
   gap: 1.5rem;
 }
 
+.four-img-card-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
 .three-content-card-group {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
@@ -1397,7 +1403,12 @@ ul {
 
   .four-content-card-group {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 1.5rem;
+  }
+
+  .four-img-card-group {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 
   .three-content-card-group {

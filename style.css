@@ -1407,8 +1407,13 @@ ul {
   }
 
   .four-img-card-group {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .project-images-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .three-content-card-group {

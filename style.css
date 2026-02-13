@@ -423,11 +423,12 @@ p {
   color: #9da4ae;
   font-size: 1.125rem;
 }
+
 /* PROJECT CARD/THUMBNAIL STYLING */
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: 1fr; /* 1 column */
+  grid-template-columns: repeat(2, 1fr); /* 1 column */
   gap: 1.5rem;
 }
 
@@ -670,6 +671,7 @@ p {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .skill-card {
@@ -1010,7 +1012,7 @@ ul {
   flex-direction: column;
   list-style-type: disc;
   padding-left: 0.5rem;
-  margin: 0;
+  margin: 0.375rem;
   gap: 0.5rem;
 }
 
@@ -1299,4 +1301,111 @@ ul {
 
 .crop-top-img {
   object-position: bottom center !important;
+}
+
+/* ========================================= */
+/* MOBILE RESPONSIVENESS (Stacking Layout)   */
+/* ========================================= */
+
+@media (max-width: 768px) {
+  /* 1. GLOBAL RESET */
+  body,
+  html {
+    overflow-y: auto; /* Browser handles scrolling */
+    height: auto;
+  }
+
+  .inner-body {
+    flex-direction: column; /* Stack top-to-bottom */
+    height: auto; /* Let page grow */
+    overflow: visible; /* No internal scrollbars */
+    padding: 0; /* We handle padding inside containers now */
+    gap: 3rem;
+  }
+
+  /* 2. FLOATING GLASS NAVBAR */
+  .nav-container {
+    position: fixed; /* Floating mode */
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%); /* Center perfectly */
+
+    width: fit-content;
+    max-width: 400px;
+    z-index: 1000; /* Always on top */
+
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Borders & Shadows */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 99px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    /* Layout */
+    justify-content: center;
+    padding: 0.675rem;
+    margin: 0;
+  }
+
+  /* 3. STATIC SIDEBAR (Intro Card Mode) */
+  .static-container {
+    position: relative; /* Un-fix it */
+    width: 100%;
+    height: 72dvh; /* Fill most of the initial screen */
+    min-height: 600px; /* Prevent squishing on tiny phones */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push Profile to Top, Socials to Bottom */
+
+    /* SPACING: 
+       Top: 6rem (Clears the floating navbar)
+       Sides: 16px (1rem) alignment 
+       Bottom: 2rem breathing room */
+    padding: 6rem 1.25rem 2rem 1.25rem;
+    top: 0;
+    left: 0;
+
+    box-sizing: border-box;
+    margin-bottom: 0;
+    z-index: 1;
+  }
+
+  .title-and-body-section {
+    gap: 0.75rem;
+  }
+
+  /* 4. SCROLLABLE CONTENT (Projects, etc.) */
+  .scroll-container {
+    width: 100%;
+    margin-left: 0;
+
+    /* Matches the side alignment */
+    padding: 0 1.25rem 4rem 1.25rem;
+
+    height: auto; /* Grow infinitely */
+    overflow: visible; /* No scrollbar */
+    box-sizing: border-box;
+  }
+
+  .text-lg {
+    font-size: 1rem;
+  }
+
+  .four-content-card-group {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .three-content-card-group {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .research-images-list {
+    gap: 3rem;
+  }
 }

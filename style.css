@@ -1,3 +1,100 @@
+/* ========================================= */
+/* 1. THEME VARIABLES (Design System)        */
+/* ========================================= */
+
+:root {
+  /* --- LIGHT MODE (Your Original Colors) --- */
+
+  /* Backgrounds */
+  --bg-body: #ffffff;
+  --bg-sidebar: #fcfcfd;
+  --bg-card: #fcfcfc; /* Projects, Media Wrappers */
+  --bg-surface: #f3f4f6; /* Metrics, Skills, Buttons Hover */
+  --bg-surface-secondary: #f9fafb; /* Toggle wrapper */
+  --bg-hover-tint: #f5f3ff; /* Nav Link Hover */
+
+  /* Text Colors */
+  --text-primary: #1f2a37; /* H1, H2, Bold Text */
+  --text-secondary: #384250; /* H3-H5, Body, Pills */
+  --text-tertiary: #4d5761; /* Nav Links, Subheadings */
+  --text-muted: #6c737f; /* Small text, Roles */
+  --text-faint: #9da4ae; /* Captions, Footer Links */
+  --text-inverse: #ffffff; /* Text on dark buttons */
+
+  /* Borders */
+  --border-subtle: #f3f4f6;
+  --border-default: #e5e7eb;
+  --border-strong: #d2d6db;
+  --border-accent: #ece9fe; /* Purple tinted border */
+
+  /* Interactive / Accents */
+  --accent-primary: #6927da; /* Purple */
+  --accent-surface: #fbfaff; /* Active Nav Bg */
+  --accent-border: #a48afb; /* Nav Pill Border */
+
+  /* Buttons */
+  --btn-primary-bg: #1f2a37;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #384250;
+
+  /* Footer (Special Case: Always Dark-ish) */
+  --bg-footer: #111927;
+  --text-footer-title: #e5e7eb;
+  --text-footer-link: #9da4ae;
+
+  /* Glassmorphism & Shadows */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --shadow-color: rgba(0, 0, 0, 0.125);
+  --shadow-pill: rgba(0, 0, 0, 0.05);
+}
+
+/* --- DARK MODE OVERRIDES --- */
+body.dark-mode {
+  /* Backgrounds: Inverted to Dark Grays */
+  --bg-body: #1c1c1c; /* Deep Charcoal (Not pure black) */
+  --bg-sidebar: #212121; /* Zinc 900 */
+  --bg-card: #212121; /* Zinc 900 */
+  --bg-surface: #1c1c1c; /* Zinc 800 */
+  --bg-surface-secondary: #1c1c1c;
+  --bg-hover-tint: #1c1c1c;
+
+  /* Text Colors: Inverted to Whites/Grays */
+  --text-primary: #f9fafb; /* Zinc 50 (Almost White) */
+  --text-secondary: #ededed; /* Zinc 200 */
+  --text-tertiary: #d1d5db; /* Zinc 300 */
+  --text-muted: #9ca3af; /* Zinc 400 */
+  --text-faint: #6b7280; /* Zinc 500 */
+  --text-inverse: #111827; /* Text on white buttons */
+
+  /* Borders */
+  --border-subtle: #27272a;
+  --border-default: #3f3f46;
+  --border-strong: #52525b;
+  --border-accent: #4c1d95; /* Darker Purple Border */
+
+  /* Interactive */
+  --accent-primary: #a78bfa; /* Light Purple for visibility */
+  --accent-surface: #27272a;
+  --accent-border: #8b5cf6;
+
+  /* Buttons: Inverted for contrast */
+  --btn-primary-bg: #f3f4f6; /* White button */
+  --btn-primary-text: #111927; /* Dark text */
+  --btn-primary-hover: #e5e7eb;
+
+  /* Footer */
+  --bg-footer: #000000; /* Pure black to distinguish from sidebar */
+  --text-footer-title: #f9fafb;
+  --text-footer-link: #9ca3af;
+
+  /* Glass & Shadows */
+  --glass-bg: rgba(24, 24, 27, 0.75); /* Dark Glass */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.6); /* Stronger shadows needed */
+  --shadow-pill: rgba(255, 255, 255, 0.05);
+}
+
 /* GLOBAL STYLES */
 *,
 *::before,
@@ -16,8 +113,9 @@
 body {
   margin: 0;
   font-family: "Mona Sans", system-ui, sans-serif;
-  background: #ffffff;
-  color: #4d5761;
+  background: var(--bg-body); /* VAR */
+  color: var(--text-tertiary); /* VAR */
+  transition: background 0.3s ease, color 0.3s ease; /* Smooth Theme Switch */
 }
 
 /* Layout */
@@ -29,14 +127,13 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-/* GLOBAL STYLES */
 
 /* Text styling */
 h1 {
   font-size: clamp(2.25rem, 1.11vw + 2rem, 3rem);
   font-weight: 600;
   line-height: 125%;
-  color: #1f2a37;
+  color: var(--text-primary); /* VAR */
   letter-spacing: -0.04em;
 }
 
@@ -44,63 +141,67 @@ h2 {
   font-size: clamp(1.875rem, 1.11vw + 1.5rem, 2.5rem);
   font-weight: 400;
   line-height: 125%;
-  color: #1f2a37;
+  color: var(--text-primary); /* VAR */
   letter-spacing: -0.04em;
 }
 
 .content-heading {
-  color: #4d5761;
+  color: var(--text-tertiary); /* VAR */
 }
 
 h3 {
   font-size: clamp(1.75rem, 1.25vw + 1.125rem, 2.25rem);
   font-weight: 500;
   line-height: 125%;
-  color: #384250;
+  color: var(--text-secondary); /* VAR */
 }
 
 h4 {
   font-size: clamp(1.25rem, 1.25vw + 1rem, 1.75rem);
   font-weight: 450;
   line-height: 125%;
-  color: #384250;
+  color: var(--text-secondary); /* VAR */
 }
 
 h5 {
-  font-size: clamp(1.25rem, 1.125vw + 0.75rem, 1.625rem);
+  font-size: clamp(
+    1rem,
+    1.125vw + 0.75rem,
+    1.625rem
+  ); /* FIXED: Lowered floor for mobile */
   font-weight: 450;
   line-height: 125%;
-  color: #384250;
+  color: var(--text-secondary); /* VAR */
 }
 
 h6 {
   font-size: 24px;
   font-weight: 450;
   line-height: 125%;
-  color: #4d5761;
+  color: var(--text-tertiary); /* VAR */
 }
 
 p {
-  color: #4d5761;
+  color: var(--text-tertiary); /* VAR */
   font-weight: 350;
 }
 
 .text-lg {
   font-size: 18px;
   line-height: 142%;
-  color: #6c737f;
+  color: var(--text-muted); /* VAR */
   font-weight: 350;
 }
 
 .light {
   font-weight: 350;
-  color: #9da4ae;
+  color: var(--text-faint); /* VAR */
 }
 
 .text-lg-bold {
   font-size: 18px;
   line-height: 142%;
-  color: #1f2a37;
+  color: var(--text-primary); /* VAR */
   font-weight: 550;
 }
 /* End of Text styling */
@@ -132,9 +233,10 @@ p {
   width: 32%;
   height: calc(100vh - 40px);
   padding: 2rem;
-  background-color: #fcfcfd;
+  background-color: var(--bg-sidebar); /* VAR */
   border-radius: 8px;
   z-index: 10;
+  transition: background-color 0.3s ease;
 }
 
 .inner-container-top {
@@ -189,56 +291,53 @@ p {
   z-index: 12;
   cursor: pointer;
   text-decoration: none;
-  color: #525866;
+  color: var(--text-tertiary); /* VAR */
   padding: 0.25rem 0.5rem;
   border-radius: 0.375rem;
-  color: #4d5761;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .nav-link:hover {
-  background: #f5f3ff;
+  background: var(--bg-hover-tint); /* VAR */
 }
 
 .nav-link.active-nav {
-  color: #111927;
+  color: var(--text-inverse); /* Handles contrast */
   font-weight: 450;
 }
 
+/* Specific override: If in Light Mode, active text is dark. */
+:root .nav-link.active-nav {
+  color: #111927;
+}
+/* In Dark Mode, if the pill becomes dark gray, text should be white. */
+body.dark-mode .nav-link.active-nav {
+  color: #ffffff;
+}
+
 .nav-link.active-nav:hover {
-  background-color: transparent; /* Let the pill show through */
-  color: #111927; /* Keep the dark text color */
-  cursor: default; /* Optional: Shows the user "you are already here" */
+  background-color: transparent;
+  cursor: default;
 }
 
 .nav-backdrop {
   position: absolute;
-  z-index: 11; /* Sits BEHIND the text */
+  z-index: 11;
 
-  /* Positioning: We lock it to the vertical center */
-  /* Matches container padding */
-  left: 0; /* JS will change this value to move it */
+  left: 0;
 
-  /* Visuals of the White Pill */
   height: 1.75rem;
-  background-color: fbfaff;
+  background-color: var(--accent-surface); /* VAR */
   border-radius: 0.675rem;
-  border: #a48afb 1px solid;
-  box-shadow: 0rem 0.125rem 0.25rem rgba(0, 0, 0, 0.125);
+  border: 1px solid var(--accent-border); /* VAR */
+  box-shadow: 0rem 0.125rem 0.25rem var(--shadow-color); /* VAR */
 
-  /* Initial State */
-  width: 0; /* Starts at 0, JS expands it immediately */
+  width: 0;
   opacity: 0;
 
-  /* Ensure the transition includes opacity so it fades in nicely */
-  transition: transform 0.3s ease, width 0.3s ease, opacity 0.2s ease;
-
-  /* The Animation */
-  /* transition-property: specific properties for better performance */
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Hardware acceleration for smoother sliding */
   will-change: transform, width;
 }
 /* END OF NAVIGATION BAR STYLING */
@@ -262,7 +361,6 @@ p {
 }
 
 /* SOCIAL LINKS STYLING */
-
 .external-links {
   display: flex;
   flex-direction: row;
@@ -271,11 +369,35 @@ p {
 
 .active-link {
   padding: 4px;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  color: var(--text-faint); /* VAR */
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 0 1px transparent;
 }
 
-.social-links {
-  height: 20px;
-  width: 20px;
+.nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.active-link:hover {
+  background-color: var(--accent-surface); /* VAR */
+  color: var(--accent-primary); /* VAR */
+  box-shadow: 0 0 0 1px var(--border-accent); /* VAR */
+}
+
+.active-link:hover .nav-icon {
+  transform: scale(1.1);
 }
 /* END OF SOCIAL LINKS STYLING */
 
@@ -306,21 +428,20 @@ p {
 .project-card {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 9; /* ← CHANGE HERE if needed */
+  aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
-  background: #fcfcfc;
+  background: var(--bg-card); /* VAR */
   text-decoration: none;
   color: inherit;
-  border: #f3f4f6 1px solid;
+  border: 1px solid var(--border-subtle); /* VAR */
 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
   transform: translateY(-0.125rem);
-  /* x-offset | y-offset | blur-radius | spread | color */
-  box-shadow: 0 1rem 2rem --0.625rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1rem 2rem -0.625rem var(--shadow-color); /* VAR */
 }
 
 .project-card img {
@@ -328,44 +449,34 @@ p {
   height: 100%;
   object-fit: cover;
   display: block;
-
   transition: transform 0.4s ease;
 }
 
 /* 1. THE OVERLAY CONTAINER & FILL */
 .project-overlay {
-  /* --- Variable Setup --- */
-  --overlay-start: 82.5%; /* Start point (Low/Subtle) */
-
-  /* --- Layout --- */
+  --overlay-start: 82.5%;
   position: absolute;
   inset: 0;
   display: flex;
   align-items: flex-end;
   padding: 20px;
+  opacity: 1;
 
-  /* --- Visibility --- */
-  opacity: 1; /* ALWAYS VISIBLE NOW (Text shows) */
-
-  /* --- The Animated Gradient --- */
   background: linear-gradient(
     to bottom,
     transparent 0%,
     transparent var(--overlay-start),
-    /* <--- Uses the variable */ rgba(0, 0, 0, 0.9) 100%
+    rgba(0, 0, 0, 0.9) 100% /* Always dark gradient, even in light mode */
   );
 
-  /* --- Animation --- */
-  /* We animate the VARIABLE, not the background */
   transition: --overlay-start 0.4s cubic-bezier(0.2, 0, 0.2, 1);
-
   border-radius: inherit;
 }
 
 .project-overlay > * {
-  opacity: 0; /* Invisible */
-  transform: translateY(10px); /* Pushed down slightly */
-  transition: all 0.3s ease; /* Smooth fade in */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
 }
 
 /* 2. THE BORDER (Syncs with the fill) */
@@ -375,14 +486,13 @@ p {
   inset: 0;
   pointer-events: none;
   border-radius: inherit;
-  padding: 0.0094rem; /* 1.5px border */
+  padding: 0.0094rem;
 
-  /* Use the SAME variable so the border moves with the shadow */
   background: linear-gradient(
     to bottom,
     transparent 0%,
     transparent var(--overlay-start),
-    /* <--- Synced! */ rgba(0, 0, 0, 0.85) 100%
+    rgba(0, 0, 0, 0.85) 100%
   );
 
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -395,21 +505,17 @@ p {
 
 /* 3. HOVER STATE */
 .project-card:hover .project-overlay {
-  /* Move the start point UP to 70% */
   --overlay-start: 70%;
 }
 
 .project-card:hover .project-overlay > * {
-  /* 2. Show the Text */
   opacity: 1;
   transform: translateY(0);
-
-  /* Optional: Stagger the text slightly so it feels premium */
   transition-delay: 0.1s;
 }
 
 .thumbnail-title {
-  color: #ffffff;
+  color: #ffffff; /* Always white on overlay */
   line-height: 125%;
 }
 
@@ -420,7 +526,7 @@ p {
 }
 
 .thumbnail-body {
-  color: #9da4ae;
+  color: #9da4ae; /* This is inside the dark overlay, so keep it fixed light gray */
   font-size: 1.125rem;
 }
 
@@ -428,7 +534,7 @@ p {
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 1 column */
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -443,111 +549,59 @@ p {
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
-  background-color: #f3f4f6;
-  border: #e5e7eb 1px solid;
+  background-color: var(--bg-surface); /* VAR */
+  border: 1px solid var(--border-default); /* VAR */
   border-radius: 0.75rem;
 }
 
-/* Social links styling */
-.active-link {
-  /* Layout & Size */
-  width: 2rem;
-  height: 2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Visuals (Default State) */
-  border-radius: 0.375rem;
-  background-color: transparent;
-
-  /* CRITICAL: This color drives the icon color */
-  color: #9da4ae;
-  text-decoration: none;
-
-  /* Smooth Transitions */
-  transition: all 0.2s ease;
-
-  /* Your box-shadow space reservation */
-  box-shadow: 0 0 0 1px transparent;
-}
-
-/* 2. THE ICON (The Sprite) */
-/* I renamed this from .sprite-icon to .nav-icon to match your code */
-.nav-icon {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-
-  /* THE MAGIC: Forces SVG to use the parent's 'color' */
-  fill: currentColor;
-
-  /* Smooth Scale Transition */
-  transition: transform 0.2s ease;
-}
-
-/* 3. HOVER STATE (Purple Mode) */
-.active-link:hover {
-  background-color: #fbfaff;
-
-  /* This color change instantly turns the SVG purple */
-  color: #6927da;
-
-  /* Your Purple Shadow Border */
-  box-shadow: 0 0 0 1px #ece9fe;
-}
-
-/* 4. HOVER SCALE */
-.active-link:hover .nav-icon {
-  transform: scale(1.1);
-}
-/* End of styling for social links */
-
 .home-project-button {
   padding: 0.75rem 1.25rem;
-  background-color: #1f2a37;
-  color: #ffffff;
+  background-color: var(--btn-primary-bg); /* VAR */
+  color: var(--btn-primary-text); /* VAR */
   width: 100%;
   border-radius: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .home-project-button:hover {
-  background-color: #384250;
+  background-color: var(--btn-primary-hover); /* VAR */
 }
 
 .project-button-primary {
   padding: 0.75rem 1.25rem;
-  background-color: #1f2a37;
-  color: #ffffff;
+  background-color: var(--btn-primary-bg); /* VAR */
+  color: var(--btn-primary-text); /* VAR */
   width: fit-content;
   border-radius: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .project-button-primary:hover {
-  background-color: #384250;
+  background-color: var(--btn-primary-hover); /* VAR */
 }
 
 .project-button {
   padding: 0.75rem 1.25rem;
   background-color: transparent;
-  color: #1f2a37;
+  color: var(--text-primary); /* VAR */
   width: fit-content;
   border-radius: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
-  border: #d2d6db 1px solid;
+  border: 1px solid var(--border-strong); /* VAR */
+  transition: background-color 0.2s ease;
 }
 
 .project-button:hover {
-  background-color: #f3f4f6;
-  border-color: #d2d6db;
+  background-color: var(--bg-surface); /* VAR */
+  border-color: var(--border-strong); /* VAR */
 }
 
 .cta-links {
@@ -563,7 +617,7 @@ p {
 /* On screens smaller than 768px (Mobile) */
 @media (max-width: 768px) {
   .cta-links {
-    flex-direction: column; /* Stacks them vertically */
+    flex-direction: column;
   }
 }
 
@@ -571,7 +625,7 @@ p {
 .footer {
   display: flex;
   flex-direction: column;
-  background-color: #111927;
+  background-color: var(--bg-footer); /* VAR */
   border-radius: 1.25rem;
   padding: 1.5rem;
   gap: 1.5rem;
@@ -587,14 +641,14 @@ p {
 
 .footer-link {
   text-decoration: none;
-  color: #9da4ae;
+  color: var(--text-footer-link); /* VAR */
   font-size: 1rem;
   line-height: 142%;
   padding: 0.5rem;
 }
 
 .footer-title {
-  color: #e5e7eb;
+  color: var(--text-footer-title); /* VAR */
 }
 
 .footer-button {
@@ -602,14 +656,13 @@ p {
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
-  border: none;
-  background: #f3f4f6;
-  border: #d2d6db 1px solid;
-  color: #1f2a37;
+  background: var(--bg-surface); /* VAR */
+  border: 1px solid var(--border-strong); /* VAR */
+  color: var(--text-primary); /* VAR */
   font-size: 1rem;
   font-weight: 450;
   border-radius: 0.5rem;
-  box-shadow: 0rem 0.125rem 0.25rem rgba(0, 0, 0, 0.125);
+  box-shadow: 0rem 0.125rem 0.25rem var(--shadow-color); /* VAR */
 }
 
 .copyright-text {
@@ -623,14 +676,11 @@ p {
 }
 /* end of footer design */
 
-/* STAGGER EFFECT: Sidebar First */
-
-/* 1. Sidebar appears immediately (0s delay) */
+/* STAGGER EFFECT */
 .sidebar-content.active-group {
   animation-delay: 0s;
 }
 
-/* 2. Main Content waits 0.1s before sliding up */
 .active-section {
   animation-delay: 0.125s;
 }
@@ -643,7 +693,7 @@ p {
 
 .divider {
   height: 1px;
-  background-color: #f3f4f6;
+  background-color: var(--border-subtle); /* VAR */
   margin: 0;
   border: none;
 }
@@ -679,10 +729,10 @@ p {
   flex-direction: row;
   gap: 0.5rem;
   align-items: center;
-  background-color: #f3f4f6;
+  background-color: var(--bg-surface); /* VAR */
   padding: 0.375rem 0.5rem 0.375rem 0.375rem;
   border-radius: 0.5rem;
-  border: #e5e7eb 1px solid;
+  border: 1px solid var(--border-default); /* VAR */
 }
 
 .skill-icon {
@@ -690,25 +740,16 @@ p {
   height: 1.25rem;
 }
 
-/* 1. THE WRAPPER (Handles Layout & Masking) */
+/* CAROUSEL / MARQUEE */
 .carousel-wrapper {
-  /* 1. THE LAYOUT HACK */
-  /* This tricks the browser into thinking the element is tiny */
-  /* so it doesn't stretch the parent container. */
   width: 1px;
-  min-width: 100%; /* ...But this forces it to visually fill the space. */
-
-  /* 2. Standard Constraints */
+  min-width: 100%;
   max-width: 100%;
-  overflow: hidden; /* Cuts off the long track */
-
-  /* 3. Visuals */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 0;
-
-  /* 4. The Fade Mask */
   -webkit-mask: linear-gradient(
     90deg,
     transparent 0%,
@@ -725,43 +766,37 @@ p {
   );
 }
 
-/* 2. THE ROW (Holds the track) */
 .marquee-row {
   display: flex;
   max-width: 100%;
   overflow: hidden;
-  user-select: none; /* Prevents highlighting text while scrolling */
+  user-select: none;
 }
 
-/* 3. THE TRACK (The Moving Part) */
 .marquee-track {
   display: flex;
-  gap: 0.75rem; /* Space between pills */
-  width: 100%; /* Force it to be wide */
-  flex-shrink: 0; /* Prevent squishing */
-
-  /* Default Animation: 40s */
+  gap: 0.75rem;
+  width: 100%;
+  flex-shrink: 0;
   animation: scroll 40s linear infinite;
 }
 
-/* 4. THE PILL STYLE (The Spans) */
 .carousel-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  background-color: #fcfcfd; /* Light Grey Background */
-  color: #384250; /* Dark Text */
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 0.5rem; /* Fully Rounded */
-  padding: 0.5rem 1rem; /* Padding inside the pill */
+  background-color: var(--bg-sidebar); /* VAR */
+  color: var(--text-secondary); /* VAR */
+  border: 1px solid var(--shadow-pill); /* VAR */
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
 
   font-size: 1rem;
   font-weight: 400;
-  white-space: nowrap; /* Text stays on one line */
+  white-space: nowrap;
 }
 
-/* --- ANIMATION LOGIC --- */
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -771,19 +806,14 @@ p {
   }
 }
 
-/* --- MODIFIERS --- */
-
-/* Speed: Fast */
 .speed-fast .marquee-track {
   animation-duration: 25s;
 }
 
-/* Direction: Reverse (Right Scroll) */
 .reverse {
   animation-direction: reverse;
 }
 
-/* Interaction: Pause on Hover */
 .hover-slow:hover .marquee-track {
   animation-play-state: paused;
 }
@@ -793,59 +823,43 @@ p {
   flex-direction: column;
   gap: 1.25rem;
   white-space: normal;
-}
+  width: 400px;
+  min-height: 240px;
+  flex-shrink: 0;
 
-.testimonial-card {
-  /* 1. SIZE & SHAPE */
-  width: 400px; /* Fixed width prevents "slimming" */
-  min-height: 240px; /* Keeps them uniform height */
-  flex-shrink: 0; /* Prevents squashing */
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Pushes author to bottom */
-  gap: 1.5rem;
+  justify-content: space-between;
   padding: 1.25rem;
 
-  /* 2. VISUALS */
-  background-color: #fcfcfd;
-  border-radius: 0.75rem; /* Larger radius for cards */
-  border: 1px solid rgba(0, 0, 0, 0.05);
-
-  /* 3. TEXT RESET (Critical!) */
-  white-space: normal; /* Allows text to wrap into paragraphs */
+  background-color: var(--bg-sidebar); /* VAR */
+  border-radius: 0.75rem;
+  border: 1px solid var(--shadow-pill); /* VAR */
   text-align: left;
 }
 
-/* The Body Text */
 .testimonial-card > p {
   font-size: 1rem;
   line-height: 1.43;
-  color: #384250;
+  color: var(--text-secondary); /* VAR */
   margin: 0;
 }
 
-/* The Author Section */
 .testimonial-author {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-
   padding-top: 1rem;
 }
 
 .testimonial-author p:first-child {
-  /* Name */
   font-weight: 600;
   font-size: 1rem;
-  color: #111;
+  color: var(--text-primary); /* VAR */
   margin: 0;
 }
 
 .testimonial-author p:last-child {
-  /* Role/Company */
   font-size: 0.875rem;
-  color: #666;
+  color: var(--text-muted); /* VAR */
   margin: 0;
 }
 
@@ -855,8 +869,6 @@ p {
   flex-direction: column;
   gap: 1.5rem;
 }
-
-/* END OF CAROUSEL STYLES */
 
 .about-pic-container {
   width: 100%;
@@ -881,12 +893,11 @@ p {
 
 .text-md-semibold {
   font-weight: 500;
-  color: #111927;
+  color: var(--text-primary); /* VAR */
 }
 
 .view-section {
-  display: none; /* Hide by default! */
-  /* Keep your layout constraints */
+  display: none;
   flex-direction: column;
   max-width: 100%;
   min-width: 0;
@@ -896,86 +907,74 @@ p {
 
 .view-section.active-section {
   display: flex;
+}
 
-  .project-hero-img-section {
-    display: flex;
-    flex-direction: column; /* Stacks images vertically */
-    width: 100%;
-    max-width: 100%;
-    gap: 1.5rem; /* Space between images */
-  }
+.project-hero-img-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  gap: 1.5rem;
+}
 
-  .full-width-img-group {
-    aspect-ratio: 16 / 9;
-    max-height: 27.5rem;
-    align-items: center;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #fcfcfc;
-  }
+.full-width-img-group {
+  aspect-ratio: 16 / 9;
+  max-height: 27.5rem;
+  align-items: center;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-card); /* VAR */
+}
 
-  .media-wrapper {
-    width: 100%;
-    position: relative; /* Safety for positioning */
+.media-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--bg-card); /* VAR */
+  transform: translateZ(0);
+}
 
-    /* Centering & Overflow */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* FORCE radius on videos */
-    border-radius: 16px; /* Your preferred radius */
+.ratio-wide {
+  aspect-ratio: 16 / 9;
+  max-height: 27.5rem;
+}
 
-    /* Visuals */
-    background: #fcfcfc; /* Placeholder color */
-    transform: translateZ(0); /* Safari video radius fix */
-  }
+.ratio-box {
+  aspect-ratio: 4 / 3;
+  max-height: fit-content;
+}
 
-  /* 2. THE SHAPES (Modifier Classes) */
+.ratio-polygon {
+  aspect-ratio: 16 / 9;
+  max-height: fit-content;
+}
 
-  /* Use this for your STACKED column items (Cinema style) */
-  .ratio-wide {
-    aspect-ratio: 16 / 9;
-    max-height: 27.5rem; /* Keeps it from getting too huge on big screens */
-  }
+.media-wrapper img,
+.media-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.625rem;
+}
 
-  /* Use this for your GRID items (Boxier style) */
+@media (max-width: 768px) {
   .ratio-box {
-    aspect-ratio: 4 / 3;
-    max-height: fit-content;
-  }
-
-  .ratio-polygon {
     aspect-ratio: 16 / 9;
-    max-height: fit-content;
   }
+}
 
-  /* 3. THE CONTENT (The Image/Video inside) */
-  .media-wrapper img,
-  .media-wrapper video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Crucial: Fills the box without stretching */
-    display: block;
-    border-radius: 0.625rem; /* Optional: Looks nice */
-  }
-
-  /* --- OPTIONAL: RESPONSIVE SHAPESHIFT --- */
-  /* If you want the Grid items (4/3) to become Wide (16/9) when on Mobile */
-  @media (max-width: 768px) {
-    .ratio-box {
-      aspect-ratio: 16 / 9; /* Switches to wide on phones */
-    }
-  }
-
-  /* 3. THE IMAGES THEMSELVES */
-  .portfolio-img {
-    display: block; /* Removes weird spacing under images */
-    width: 100%; /* Fills the wrapper */
-    max-width: 100%; /* NEVER wider than the wrapper */
-    height: auto; /* Maintains aspect ratio */
-    object-fit: cover;
-    border-radius: 12px; /* Optional: Looks nice */
-  }
+.portfolio-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .project-title-and-caption {
@@ -1003,7 +1002,7 @@ p {
 }
 
 .role-title {
-  color: #9da4ae;
+  color: var(--text-faint); /* VAR */
   font-weight: 350;
 }
 
@@ -1017,7 +1016,7 @@ ul {
 }
 
 .body-text {
-  color: #384250;
+  color: var(--text-secondary); /* VAR */
 }
 
 .role-group {
@@ -1036,15 +1035,15 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
-  border: 1px solid #ece9fe;
+  border: 1px solid var(--border-accent); /* VAR */
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: var(--bg-body); /* VAR */
   border-radius: 1rem;
 }
 
 .bold {
   font-weight: 450;
-  color: #6c737f;
+  color: var(--text-muted); /* VAR */
 }
 
 .subhead-list {
@@ -1072,7 +1071,7 @@ ul {
 
 .three-content-card-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   width: 100%;
 }
@@ -1083,10 +1082,9 @@ ul {
   gap: 1.5rem;
 }
 
-/* MOBILE LAYOUT (Under 768px) */
 @media (max-width: 768px) {
   .three-content-card-group {
-    grid-template-columns: 1fr; /* Forces a single column stack */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1109,7 +1107,7 @@ ul {
 
 .caption-text {
   font-size: 0.875rem;
-  color: #9da4ae;
+  color: var(--text-faint); /* VAR */
   font-weight: 450;
 }
 
@@ -1120,22 +1118,14 @@ ul {
 }
 
 .portfolio-media {
-  /* 1. SHAPE & FIT */
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   object-position: center top;
-
-  /* 2. ROUNDED CORNERS (The Fix) */
-  border-radius: 12px; /* Sets the curve */
-  overflow: hidden; /* CRITICAL: Cuts off any video parts that try to escape the curve */
-
-  /* 3. VISUALS */
+  border-radius: 12px;
+  overflow: hidden;
   display: block;
-  background-color: #f3f4f6;
-
-  /* Optional Safari fix if corners still flicker */
-  /* transform: translateZ(0); */
+  background-color: var(--bg-surface); /* VAR */
 }
 
 .bottom-focus {
@@ -1166,21 +1156,15 @@ ul {
   gap: 1rem;
 }
 
-/* ========================================= */
-/* CONTACT SWITCHER STYLES                   */
-/* ========================================= */
-
-/* THE TOGGLE BUTTONS */
+/* CONTACT SWITCHER STYLES */
 .contact-toggle-wrapper {
-  position: relative; /* Anchor for the sliding pill */
+  position: relative;
   display: inline-flex;
-  background: #f9fafb; /* Light gray background */
-  padding: 4px; /* Space for the pill to slide inside */
-  border-radius: 0.625rem; /* Pill shape */
-  border: 1px solid #e5e7eb;
+  background: var(--bg-surface-secondary); /* VAR */
+  padding: 4px;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border-default); /* VAR */
   width: fit-content;
-
-  /* Creates a stacking context so backdrop stays contained */
   isolation: isolate;
 }
 
@@ -1188,67 +1172,59 @@ ul {
   position: absolute;
   top: 4px;
   bottom: 4px;
-  left: 0; /* JS controls this */
+  left: 0;
 
-  /* YOUR ACTIVE STYLES MOVED HERE */
-  background: #ffffff;
+  background: var(--bg-body); /* VAR */
   border-radius: 0.375rem;
-  box-shadow: 0 1px 3px #0a0d120d, 0 1px 2px -1px #0a0d121a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 
-  z-index: 1; /* Sits behind text, above gray background */
+  z-index: 1;
 
-  /* The Animation */
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  width: 0; /* Starts hidden, JS expands it */
+  width: 0;
 }
 
 .toggle-btn {
   position: relative;
-  z-index: 2; /* Sits ON TOP of the backdrop */
+  z-index: 2;
 
   border: none;
-  background: transparent; /* Must be transparent now */
+  background: transparent;
   padding: 10px 24px;
   border-radius: 0.375rem;
   font-size: 1rem;
   font-weight: 450;
-  color: #6b7280;
+  color: var(--text-muted); /* VAR */
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.3s ease; /* Only animate text color */
+  transition: color 0.3s ease;
 }
 
-/* Active State (White with Shadow) */
 .toggle-btn.active {
   font-weight: 500;
-  color: #111827; /* Dark text */
+  color: var(--text-primary); /* VAR */
 }
 
-/* CONTENT VIEWS */
 .contact-view {
-  display: none; /* Hide both by default */
+  display: none;
   animation: fadeIn 0.4s ease;
 }
 
 .contact-view.active-view {
-  display: block; /* Show only the active one */
+  display: block;
   box-sizing: border-box;
 }
 
-/* EMAIL CARD STYLING */
 .email-card {
-  /* Change from inline-block to flex so we can control width */
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Aligns text to left */
+  align-items: flex-start;
 
-  /* THE KEY FIX: */
-  width: 100% !important; /* Forces the card to stretch full width */
-  box-sizing: border-box; /* Ensures padding doesn't break the layout */
+  width: 100% !important;
+  box-sizing: border-box;
 
-  /* Keep your existing visuals */
   padding: 2rem;
   border-radius: 0.75rem;
 }
@@ -1262,12 +1238,12 @@ ul {
 
   font-size: 1.1rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-primary); /* VAR */
 }
 
 .copy-btn {
-  background: white;
-  border: 1px solid #d1d5db;
+  background: var(--bg-body); /* VAR */
+  border: 1px solid var(--border-strong); /* VAR */
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -1276,13 +1252,13 @@ ul {
   align-items: center;
   gap: 6px;
   transition: all 0.2s;
+  color: var(--text-secondary); /* VAR */
 }
 
 .copy-btn:active {
   transform: scale(0.95);
 }
 
-/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1310,47 +1286,46 @@ ul {
 }
 
 /* ========================================= */
-/* MOBILE RESPONSIVENESS (Stacking Layout)   */
+/* MOBILE RESPONSIVENESS (All-in-One)        */
 /* ========================================= */
 
 @media (max-width: 768px) {
   /* 1. GLOBAL RESET */
   body,
   html {
-    overflow-y: auto; /* Browser handles scrolling */
+    overflow-y: auto;
     height: auto;
   }
 
   .inner-body {
-    flex-direction: column; /* Stack top-to-bottom */
-    height: auto; /* Let page grow */
-    overflow: visible; /* No internal scrollbars */
-    padding: 0; /* We handle padding inside containers now */
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+    padding: 0;
     gap: 3rem;
   }
 
   /* 2. FLOATING GLASS NAVBAR */
   .nav-container {
-    position: fixed; /* Floating mode */
+    position: fixed;
     top: 1rem;
     left: 50%;
-    transform: translateX(-50%); /* Center perfectly */
+    transform: translateX(-50%);
 
     width: fit-content;
     max-width: 400px;
-    z-index: 1000; /* Always on top */
+    z-index: 1000;
 
     /* Glass Effect */
-    background: rgba(255, 255, 255, 0.75);
+    background: var(--glass-bg); /* VAR */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
     /* Borders & Shadows */
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--glass-border); /* VAR */
     border-radius: 99px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px var(--shadow-color); /* VAR */
 
-    /* Layout */
     justify-content: center;
     padding: 0.675rem;
     margin: 0;
@@ -1358,19 +1333,15 @@ ul {
 
   /* 3. STATIC SIDEBAR (Intro Card Mode) */
   .static-container {
-    position: relative; /* Un-fix it */
+    position: relative;
     width: 100%;
-    height: 72dvh; /* Fill most of the initial screen */
-    min-height: 600px; /* Prevent squishing on tiny phones */
+    height: 72dvh;
+    min-height: 600px;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Push Profile to Top, Socials to Bottom */
+    justify-content: space-between;
 
-    /* SPACING: 
-       Top: 6rem (Clears the floating navbar)
-       Sides: 16px (1rem) alignment 
-       Bottom: 2rem breathing room */
     padding: 6rem 1.25rem 2rem 1.25rem;
     top: 0;
     left: 0;
@@ -1389,11 +1360,10 @@ ul {
     width: 100%;
     margin-left: 0;
 
-    /* Matches the side alignment */
     padding: 0 1.25rem 4rem 1.25rem;
 
-    height: auto; /* Grow infinitely */
-    overflow: visible; /* No scrollbar */
+    height: auto;
+    overflow: visible;
     box-sizing: border-box;
   }
 
@@ -1424,30 +1394,113 @@ ul {
   .research-images-list {
     gap: 3rem;
   }
-}
 
-/* ========================================= */
-/* MOBILE: Force Thumbnails to Show Text     */
-/* ========================================= */
-
-@media (max-width: 768px) {
-  /* 1. Activate the Dark Gradient Background */
-  /* We change the variable so the gradient starts earlier (50%) 
-     making the text readable against any image. */
+  /* MOBILE THUMBNAIL VISIBILITY */
   .project-card .project-overlay {
     --overlay-start: 50%;
   }
 
-  /* 2. Make the Title & Text Visible */
-  /* We override the default "opacity: 0" and "transform" */
   .project-card .project-overlay > * {
-    opacity: 1 !important; /* Force visibility */
-    transform: translateY(0) !important; /* Move text to final position */
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
-  /* Optional: Stop the card from "jumping" when you tap it on mobile */
   .project-card:hover {
     transform: none;
-    box-shadow: none; /* Uses your default border instead */
+    box-shadow: none;
   }
+}
+
+/* ========================================= */
+/* BUTTON COLOR FIXES                        */
+/* ========================================= */
+
+/* 1. FOOTER BUTTON (Always Light) */
+/* Because the footer background is always dark, we force this button 
+   to stay "Light Mode" (White/Grey) 100% of the time. */
+.footer-button {
+  background-color: #f3f4f6 !important; /* Always White/Light Grey */
+  color: #1f2a37 !important; /* Always Dark Text */
+  border: 1px solid #d2d6db !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.footer-button:hover {
+  background-color: #ffffff !important; /* Brighter on hover */
+}
+
+/* 2. PROJECT SECONDARY BUTTONS (Links) */
+/* Ensures they are sharp Black/Dark Grey in Light Mode */
+.project-button {
+  /* Force it to use the high-contrast text color */
+  color: var(--text-primary) !important;
+  border-color: var(--border-strong) !important;
+}
+
+/* In Dark Mode, we invert them so they are readable against the black page */
+body.dark-mode .project-button {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.dark-mode .project-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 3. PRIMARY BUTTONS (Safety Check) */
+/* Ensures the main "View Project" buttons are solid Black in Light Mode */
+.home-project-button,
+.project-button-primary {
+  background-color: var(--btn-primary-bg); /* Should be #1f2a37 (Dark) */
+  color: var(--btn-primary-text); /* Should be #ffffff (White) */
+}
+
+/* ========================================= */
+/* CONTACT TOGGLE FIXES                      */
+/* ========================================= */
+
+/* 1. TEXT SWAPPING (Desktop vs Mobile) */
+.mobile-text {
+  display: none;
+} /* Hide short text on Desktop */
+
+/* 2. MOBILE LAYOUT (Under 768px) */
+@media (max-width: 768px) {
+  .desktop-text {
+    display: none;
+  } /* Hide long text */
+  .mobile-text {
+    display: inline;
+  } /* Show short text */
+
+  .contact-toggle-wrapper {
+    width: 100%; /* Force full width */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    padding: 4px;
+  }
+
+  .toggle-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0; /* Remove side padding */
+  }
+}
+
+/* 3. DARK MODE COLORS */
+/* Wrapper becomes Black */
+body.dark-mode .contact-toggle-wrapper {
+  background-color: #1c1c1c;
+  border-color: #333;
+}
+
+/* Pill becomes Dark Grey (#272727) */
+body.dark-mode .toggle-backdrop {
+  background-color: #272727 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Active Text becomes White */
+body.dark-mode .toggle-btn.active {
+  color: #ffffff;
 }

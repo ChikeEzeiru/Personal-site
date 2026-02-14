@@ -1739,7 +1739,7 @@
             </div>
 
             <a
-              href="https://calendly.com/chike-ezeiru/30min"
+              href="https://calendly.com/chike-ezeiru/discovery-call?hide_event_type_details=1&hide_gdpr_banner=1"
               target="_blank"
               rel="noopener noreferrer"
               class="footer-button"
@@ -1964,11 +1964,12 @@
               <div class="toggle-backdrop"></div>
 
               <button
-                class="toggle-btn"
+                class="toggle-btn active"
                 id="btn-email"
                 onclick="switchContact('email')"
               >
-                Send me an Email
+                <span class="desktop-text">Send me an Email</span>
+                <span class="mobile-text">Email</span>
               </button>
 
               <button
@@ -1976,7 +1977,8 @@
                 id="btn-calendar"
                 onclick="switchContact('calendar')"
               >
-                Book a Discovery Call
+                <span class="desktop-text">Book a Discovery Call</span>
+                <span class="mobile-text">Book Call</span>
               </button>
             </div>
 
@@ -4594,5 +4596,19 @@
     </div>
 
     <script src="/script.js"></script>
+    <script>
+      (function () {
+        // 1. Get the current hour (0-23)
+        const hour = new Date().getHours();
+
+        // 2. Define "Dark Hours" (e.g., 6 PM to 6 AM)
+        const isEvening = hour >= 18 || hour < 6;
+
+        // 3. Apply the class if it's evening
+        if (isEvening) {
+          document.body.classList.add("dark-mode");
+        }
+      })();
+    </script>
   </body>
 </html>

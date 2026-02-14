@@ -210,62 +210,75 @@ document.addEventListener("DOMContentLoaded", function () {
 /* SMART CONTACT SWITCHER (Lazy Loads Calendly) */
 /* ========================================= */
 
-// Global flag to track if we already loaded the script
 let isCalendlyLoaded = false;
 
 window.switchContact = function (mode) {
   const btnEmail = document.getElementById("btn-email");
   const btnCalendar = document.getElementById("btn-calendar");
-  const backdrop = document.querySelector(".toggle-backdrop");
-
-  // 1. Safety Check
-  if (!btnEmail || !btnCalendar || !backdrop) return;
-
-  // 2. Decide active button
   const activeBtn = mode === "email" ? btnEmail : btnCalendar;
 
-  // 3. Update Visuals (Buttons & Pill)
+  // 1. Update Visuals (Classes)
   btnEmail.classList.remove("active");
   btnCalendar.classList.remove("active");
   activeBtn.classList.add("active");
 
-  if (activeBtn.offsetWidth > 0) {
-    backdrop.style.width = activeBtn.offsetWidth + "px";
-    backdrop.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
-    backdrop.style.opacity = "1";
+  // 2. Move the Pill (Refactored for reliability)
+  moveBackdrop(activeBtn);
+
+  // 3. Toggle Views
+  document.querySelectorAll(".contact-view").forEach((el) => {
+    el.style.display = "none";
+    el.classList.remove("active-view");
+  });
+
+  const targetView = document.getElementById("view-" + mode);
+  if (targetView) {
+    targetView.style.display = "block";
+    // Small delay to let the display:block register before fading in
+    setTimeout(() => targetView.classList.add("active-view"), 10);
   }
 
-  // 4. Toggle Views
-  document.getElementById("view-calendar").classList.remove("active-view");
-  document.getElementById("view-email").classList.remove("active-view");
-  document.getElementById("view-" + mode).classList.add("active-view");
-
-  // 5. THE PERFORMANCE FIX: Load Calendly ONLY if needed
+  // 4. THE PERFORMANCE FIX: Load Calendly ONLY if needed
   if (mode === "calendar" && !isCalendlyLoaded) {
     loadCalendlyScript();
   }
 };
 
-// Helper function to inject the script
-function loadCalendlyScript() {
-  console.log("Loading Calendly..."); // Debugging
+// Helper: Moves the pill to the target button
+function moveBackdrop(targetBtn) {
+  const backdrop = document.querySelector(".toggle-backdrop");
+  if (targetBtn && backdrop) {
+    backdrop.style.width = targetBtn.offsetWidth + "px";
+    backdrop.style.transform = `translateX(${targetBtn.offsetLeft}px)`;
+    backdrop.style.opacity = "1";
+  }
+}
 
+// Helper: Injects the script
+function loadCalendlyScript() {
+  console.log("Loading Calendly...");
   const script = document.createElement("script");
   script.src = "https://assets.calendly.com/assets/external/widget.js";
   script.async = true;
-
-  // Append it to the body so it starts running
   document.body.appendChild(script);
-
-  // Mark as loaded so we don't download it twice
   isCalendlyLoaded = true;
 }
 
-// Initial Load
+// 5. INITIALIZE ON LOAD & RESIZE
+// We add a resize listener so the pill stays correct if the user rotates their phone
 window.addEventListener("load", () => {
-  switchContact("email");
-  // Redundant check to ensure pill alignment
-  setTimeout(() => switchContact("email"), 300);
+  // Check which one is active in HTML (default to email)
+  const mode = document
+    .getElementById("btn-calendar")
+    .classList.contains("active")
+    ? "calendar"
+    : "email";
+  switchContact(mode);
+});
+
+window.addEventListener("resize", () => {
+  const activeBtn = document.querySelector(".toggle-btn.active");
+  moveBackdrop(activeBtn);
 });
 
 /* ========================================= */
@@ -297,3 +310,35 @@ window.copyEmail = function () {
       alert("Copied to clipboard: " + emailText);
     });
 };
+
+/* ========================================= */
+/* FIX: RECALCULATE PILL ON SECTION CHANGE   */
+/* ========================================= */
+
+// 1. Create a "Watcher" for the Contact Section
+const contactObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    // If the contact section just became visible...
+    if (entry.isIntersecting) {
+      // ...Find the currently active button (or default to email)
+      const activeBtn =
+        document.querySelector(".toggle-btn.active") ||
+        document.getElementById("btn-email");
+
+      // ...And force the pill to jump to it immediately
+      if (activeBtn) {
+        // Small delay to ensure the browser has finished "un-hiding" the element
+        setTimeout(() => {
+          moveBackdrop(activeBtn);
+        }, 50);
+      }
+    }
+  });
+});
+
+// 2. Tell the Watcher which section to look for
+// Note: Ensure '.contact-section' matches the class of your Contact Page container
+const contactSection = document.querySelector(".contact-section");
+if (contactSection) {
+  contactObserver.observe(contactSection);
+}
